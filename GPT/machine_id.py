@@ -7,12 +7,7 @@ import uuid
 
 def get_machine_unique_identifier():
     if platform.system() == "Windows":
-        # Use the Windows Management Instrumentation (WMI) interface
-        import wmi
-        wmi_obj = wmi.WMI()
-        for interface in wmi_obj.Win32_NetworkAdapterConfiguration(IPEnabled=True):
-            mac_address = interface.MACAddress
-            break
+        mac_address = ""
     else:
         for line in os.popen("ifconfig" if platform.system() != "Linux" else "ip link"):
             if "ether" in line or "HWaddr" in line:
